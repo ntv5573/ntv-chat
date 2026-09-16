@@ -1,4 +1,4 @@
-# OmeLike — prototype pédagogique (BTS SIO SISR)
+# NTV — prototype de chat vidéo
 
 Un mini "OmeTV" fait maison : visio aléatoire entre deux inconnus (WebRTC),
 chat texte en direct, avec filtres sur le pays et le genre recherchés.
