@@ -1,0 +1,13 @@
+{
+  "name": "omelike",
+  "version": "1.0.0",
+  "description": "Prototype pedagogique type Omegle/OmeTV - WebRTC + matching par filtres (BTS SIO SISR)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "geoip-lite": "^1.4.10",
+    "ws": "^8.18.0"
+  }
+}
