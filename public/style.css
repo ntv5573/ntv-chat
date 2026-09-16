@@ -1,0 +1,459 @@
+/* -------------------------------------------------------------------
+   Identité visuelle : "poste d'écoute / salle de contrôle réseau".
+   Palette sombre bleu-nuit avec un accent ambre façon cadran radio,
+   typographie slab en tête + sans-serif système pour l'UI.
+------------------------------------------------------------------- */
+
+:root {
+  --bg: #0F1720;
+  --panel: #17222C;
+  --panel-raised: #1D2A35;
+  --line: #2A3944;
+  --text: #EDEEE9;
+  --text-muted: #8A97A3;
+  --amber: #E8A33D;
+  --amber-dim: #4A3A22;
+  --rust: #C4553B;
+  --green-live: #6FAE7E;
+
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(232, 163, 61, 0.05), transparent 40%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Barre supérieure ---------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { display: flex; align-items: center; gap: 10px; }
+
+.brand-mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green-live);
+  box-shadow: 0 0 8px var(--green-live);
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+/* ---------- Mise en page générale ---------- */
+
+.layout {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+.panel { width: 100%; }
+
+/* ---------- Écran de configuration ---------- */
+
+.setup {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 36px 34px 30px;
+}
+
+.setup h1 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 0 0 28px;
+}
+
+.field {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.field select {
+  background: var(--panel-raised);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 10px 12px;
+  font-size: 14.5px;
+  font-family: var(--font-ui);
+  appearance: none;
+  cursor: pointer;
+}
+
+.field select:focus, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
+}
+
+.btn-primary, .btn-secondary, .btn-danger {
+  border: none;
+  border-radius: 3px;
+  padding: 12px 18px;
+  font-size: 14.5px;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+
+.btn-primary:active, .btn-secondary:active, .btn-danger:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--amber);
+  color: #241a0a;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.btn-primary:hover { filter: brightness(1.08); }
+
+.btn-small { width: auto; margin-top: 0; padding: 10px 16px; }
+
+.error {
+  color: var(--rust);
+  font-size: 13px;
+  margin-top: 14px;
+  min-height: 18px;
+}
+
+/* ---------- Écran d'appel ---------- */
+
+.videos {
+  position: relative;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.remote-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #060a0e;
+}
+
+.call-status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: #060a0e;
+  pointer-events: none;
+}
+
+.call-status.away { display: flex; }
+
+.peer-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  background: rgba(15, 23, 32, 0.75);
+  border: 1px solid var(--line);
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+
+.local-box {
+  position: absolute;
+  width: 26%;
+  min-width: 110px;
+  aspect-ratio: 4 / 3;
+  bottom: 14px;
+  right: 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+#local-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* effet miroir pour sa propre caméra */
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn-secondary {
+  background: var(--panel-raised);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+
+.btn-danger {
+  background: transparent;
+  color: var(--rust);
+  border: 1px solid rgba(196, 85, 59, 0.5);
+}
+.btn-danger:hover { background: rgba(196, 85, 59, 0.12); }
+
+/* ---------- Chat ---------- */
+
+.chat {
+  margin-top: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  height: 260px;
+}
+
+.chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.msg { max-width: 80%; line-height: 1.4; }
+.msg .who {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.msg.me { align-self: flex-end; text-align: right; }
+.msg.me .bubble { background: var(--amber-dim); border: 1px solid #6a5327; }
+.msg.them .bubble { background: var(--panel-raised); border: 1px solid var(--line); }
+.msg.system { align-self: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 12px; }
+
+.bubble {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.chat-form input {
+  flex: 1;
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 14px;
+}
+
+@media (max-width: 560px) {
+  .setup { padding: 26px 22px; }
+  .local-box { width: 34%; }
+}
+
+/* ---------- Cases à cocher (âge / CGU) ---------- */
+
+.checkbox-field label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.checkbox-field input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  accent-color: var(--amber);
+  cursor: pointer;
+}
+
+.checkbox-field a { color: var(--amber); }
+
+.hint-danger {
+  color: var(--rust);
+  border: 1px solid rgba(196, 85, 59, 0.35);
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin: 4px 0 22px;
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: none;
+}
+
+/* ---------- Bouton Signaler ---------- */
+
+.btn-report {
+  background: transparent;
+  color: var(--rust);
+  border: 1px solid rgba(196, 85, 59, 0.5);
+  border-radius: 3px;
+  padding: 12px 18px;
+  font-size: 14.5px;
+  font-family: var(--font-ui);
+  cursor: pointer;
+}
+.btn-report:hover { background: rgba(196, 85, 59, 0.15); }
+
+/* ---------- Pied de page ---------- */
+
+.site-footer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.site-footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.site-footer a:hover { color: var(--amber); }
+
+/* ---------- Pages légales (CGU / confidentialité) ---------- */
+
+.legal { max-width: 720px; }
+
+.legal h1 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+
+.legal h2 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 30px;
+  color: var(--amber);
+}
+
+.legal p, .legal li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.legal-updated {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.legal-disclaimer {
+  background: rgba(232, 163, 61, 0.08);
+  border: 1px solid var(--amber-dim);
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13px;
+}
+
+.legal-table th, .legal-table td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.legal-table th {
+  background: var(--panel-raised);
+  color: var(--text-muted);
+  font-weight: 600;
+}

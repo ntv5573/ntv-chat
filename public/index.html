@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NTV — Prototype pédagogique</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <span class="brand-name">NTV</span>
+  </div>
+  <span class="badge">Prototype pédagogique — BTS SIO SISR</span>
+</header>
+
+<main class="layout">
+
+  <!-- ÉCRAN 1 : formulaire de préférences avant recherche -->
+  <section id="setup-screen" class="panel setup">
+    <h1>Choisis avec qui discuter</h1>
+    <p class="hint">Le genre est déclaratif (non vérifié). Le pays, lui, est détecté automatiquement à partir de ton adresse IP — tu choisis seulement le pays où tu veux trouver quelqu'un.</p>
+
+    <div class="field">
+      <label for="my-gender">Je suis</label>
+      <select id="my-gender">
+        <option value="any">Peu importe / non précisé</option>
+        <option value="homme">Un homme</option>
+        <option value="femme">Une femme</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="want-gender">Je veux tomber sur</label>
+      <select id="want-gender">
+        <option value="any">Peu importe</option>
+        <option value="homme">Des hommes</option>
+        <option value="femme">Des femmes</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="target-country">Pays où je veux discuter</label>
+      <select id="target-country"></select>
+    </div>
+
+    <div class="field checkbox-field">
+      <label>
+        <input type="checkbox" id="age-confirm">
+        Je confirme avoir 18 ans ou plus.
+      </label>
+    </div>
+
+    <div class="field checkbox-field">
+      <label>
+        <input type="checkbox" id="cgu-accept">
+        J'ai lu et j'accepte les
+        <a href="cgu.html" target="_blank" rel="noopener">CGU</a>
+        et la
+        <a href="confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.
+      </label>
+    </div>
+
+    <p class="hint hint-danger">
+      Ce site met en relation des inconnus par webcam. N'importe qui peut
+      te montrer un contenu choquant ou inapproprié : utilise le bouton
+      "Signaler" en cas de problème, il coupe la conversation
+      immédiatement.
+    </p>
+
+    <button id="start-btn" class="btn-primary">Démarrer la recherche</button>
+    <p id="setup-error" class="error"></p>
+  </section>
+
+  <!-- ÉCRAN 2 : appel vidéo + chat -->
+  <section id="call-screen" class="panel call hidden">
+
+    <div class="videos">
+      <div class="video-box remote-box">
+        <video id="remote-video" autoplay playsinline></video>
+        <div id="call-status" class="call-status">Recherche d'un partenaire…</div>
+        <span id="peer-tag" class="peer-tag hidden"></span>
+      </div>
+      <div class="video-box local-box">
+        <video id="local-video" autoplay playsinline muted></video>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="next-btn" class="btn-secondary">Suivant ⏭</button>
+      <button id="report-btn" class="btn-report">🚩 Signaler</button>
+      <button id="stop-btn" class="btn-danger">Arrêter</button>
+    </div>
+
+    <div class="chat">
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form" class="chat-form">
+        <input id="chat-input" type="text" placeholder="Écris un message…" autocomplete="off" maxlength="500">
+        <button type="submit" class="btn-primary btn-small">Envoyer</button>
+      </form>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <a href="cgu.html">CGU</a>
+  <a href="confidentialite.html">Politique de confidentialité</a>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
